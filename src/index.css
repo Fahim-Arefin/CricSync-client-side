@@ -1,3 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .input-field {
+    @apply w-full rounded-md border border-gray-700  px-5 py-2.5  outline-none placeholder:tracking-wide
+    focus:outline-none focus:ring focus:ring-[#f87060] focus:ring-offset-2 focus:border-[#f87060];
+  }
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+}
+
+.option-menu li a.active {
+  color: #f87060;
+  border-bottom-width: 2px;
+  border-bottom-color: #f87060;
+}
+
+.dashboard li a.active div {
+  background-color: #f87060;
+  color: black;
+}
+.dashboard li a.active div {
+  background-color: #f87060;
+  color: black;
+}
+
+.overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #1f2937 #ccc;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1f2937;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #e84a5f;
+}

@@ -23,7 +23,7 @@ function Navbar({ className }) {
 
   return (
     <div
-      className={`sticky shadow-2xl top-0 bg-white  z-50 px-12 mx-auto navbar ${className}`}
+      className={`sticky shadow-md top-0 bg-white  z-50 px-12 mx-auto navbar ${className}`}
       style={{ fontWeight: 500 }}
     >
       <div className="navbar-start">
@@ -63,12 +63,10 @@ function Navbar({ className }) {
           </ul>
         </div>
         <div className="text-xl tracking-widest font-bold flex items-center space-x-4 px-6 py-4 rounded-lg">
-          <div className="w-32 md:w-44">
+          {/* <div className="w-32 md:w-44">
             <img className="w-full h-full" src="/logo.png" alt="" />
-          </div>
-          {/* <span className="bg-gradient-to-r from-yellow-500 to-orange-400 text-transparent bg-clip-text text-xl lg:text-2xl">
-            JobZen
-          </span> */}
+          </div> */}
+          <span className="text-[#f87060] text-xl lg:text-3xl">CricSync</span>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex ">
@@ -123,13 +121,13 @@ function Navbar({ className }) {
               tabIndex={0}
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
-              <li className="hover:bg-[#aea1ea] rounded-lg">
+              <li className="hover:bg-[#f87060] rounded-lg">
                 <a className="hover:text-white transition-all duration-150">
                   {user?.displayName}
                 </a>
               </li>
               <li
-                className="hover:bg-[#aea1ea] rounded-lg"
+                className="hover:bg-[#f87060] rounded-lg"
                 onClick={handleLogOut}
               >
                 <a className="hover:text-white transition-all duration-150">
@@ -151,11 +149,6 @@ function Navbar({ className }) {
           //   <div>log out</div>
           // </div>
           <div>
-            {/* <Link to="/login">
-              <button className="border border-[#aea1ea] text-zinc-800 px-3 py-2 rounded-md hover:bg-[#9b8ed7] active:bg-[#aea1ea]">
-                Log in
-              </button>
-            </Link> */}
             <Button
               to="/login"
               primary

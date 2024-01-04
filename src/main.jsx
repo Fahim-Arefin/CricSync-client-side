@@ -8,6 +8,10 @@ import { AuthProvider } from "./context/AuthProvider";
 import { HelmetProvider } from "react-helmet-async";
 import AppLayout from "./layouts/AppLayout";
 import Home from "./pages/Home";
+import ScoreboardForm from "./components/ScoreboardForm";
+import TeamForm from "./components/TeamForm";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/match",
+        element: <ScoreboardForm />,
+      },
+      {
+        path: "/team/new",
+        element: <TeamForm />,
       },
     ],
   },
@@ -33,7 +45,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <HelmetProvider>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
       </AuthProvider>
     </HelmetProvider>
   </React.StrictMode>

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllTeam } from "../async thunk/fetchAllTeam";
+import { createTeam } from "../async thunk/createTeam";
 
 const teamSlice = createSlice({
   name: "teams",
@@ -25,18 +26,18 @@ const teamSlice = createSlice({
       state.error = action.error;
     });
 
-    // //adduser
-    // builder.addCase(addUser.pending, (state, action) => {
-    //   state.isLoading = true;
-    // });
-    // builder.addCase(addUser.fulfilled, (state, action) => {
-    //   // state.isLoading = false
-    //   state.data.push(action.payload);
-    // });
-    // builder.addCase(addUser.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.error;
-    // });
+    //adduser
+    builder.addCase(createTeam.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createTeam.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data.push(action.payload);
+    });
+    builder.addCase(createTeam.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
   },
 });
 

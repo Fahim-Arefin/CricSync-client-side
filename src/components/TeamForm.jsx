@@ -1,12 +1,24 @@
 // TeamForm.js
 import { useState } from "react";
+import { BsUpload } from "react-icons/bs";
 import Button from "./Button";
 import useAuth from "../hooks/useAuth";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useDispatch } from "react-redux";
+import { createTeam } from "../store";
+import { useSelector } from "react-redux";
+import SpinnerWithBlur from "../components/SpinnerWithBlur";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const TeamForm = () => {
-  const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const { user, successToast, errorToast } = useAuth();
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { isLoading, error } = useSelector((state) => {
+    return state.teams;
+  });
 
   const [team, setTeam] = useState({
     author: user?.email,
@@ -35,18 +47,26 @@ const TeamForm = () => {
     e.preventDefault();
 
     console.log(team);
-
-    try {
-      const response = await axiosPublic.post("/teams/new", team);
-      console.log("Team created successfully:", response.data);
-    } catch (error) {
-      console.error("Error creating team:", error);
-    }
+    dispatch(createTeam(team))
+      .unwrap()
+      .then(() => {
+        successToast("Team Created Successfull!", 2000);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      })
+      .catch(() => {
+        errorToast(error, 2000);
+      });
   };
 
   return (
     <div className="container mx-auto mt-8">
-      <h1 className="max-w-3xl mx-auto text-2xl text-[#f87060] font-bold mb-12">
+      <Helmet>
+        <title>CricSync | Create Team</title>
+      </Helmet>
+      {isLoading && <SpinnerWithBlur />}
+      <h1 className="max-w-3xl mx-auto text-4xl text-[#f87060] font-bold mb-12">
         Create your team
       </h1>
       <form onSubmit={handleFormSubmit} className="max-w-3xl mx-auto">
@@ -89,11 +109,31 @@ const TeamForm = () => {
         ))}
 
         <div className="flex items-center justify-between">
-          <Button primary className="px-4 py-2 rounded-md">
-            Submit
+          <Button
+            primary
+            className="px-4 py-2 rounded-md flex space-x-2 items-center font-bold"
+          >
+            <BsUpload />
+            <span>{isLoading ? "Submitting.." : "Submit"}</span>
           </Button>
         </div>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        style={{
+          display: "inline-block",
+          width: "auto",
+        }}
+      />
     </div>
   );
 };

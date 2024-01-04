@@ -12,6 +12,7 @@ import ScoreboardForm from "./components/ScoreboardForm";
 import TeamForm from "./components/TeamForm";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import CreateMatchForm from "./components/CreateMatchFrom";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/team/new",
         element: <TeamForm />,
+      },
+      {
+        path: "/match/new",
+        element: <CreateMatchForm />,
       },
     ],
   },

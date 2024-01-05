@@ -3,10 +3,10 @@ const Footer = ({ className }) => {
     <footer className={`bg-gray-800 text-white ${className}`}>
       <div className="container mx-auto py-8 px-12">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-          <div className="mb-4 md:mb-0 w-40 ">
+          {/* <div className="mb-4 md:mb-0 w-40 ">
             <img src="/logo.png" alt="Your Logo" className="w-full h-full" />
-          </div>
-          <div className="md:ml-auto">
+          </div> */}
+          {/* <div className="md:ml-auto">
             <ul className="flex space-x-4">
               <li>
                 <a href="/about">About</a>
@@ -18,11 +18,11 @@ const Footer = ({ className }) => {
                 <a href="/privacy">Privacy Policy</a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
         <div className="mt-4 md:mt-8">
           <p>
-            &copy; {new Date().getFullYear()} MetroShelter. All Rights Reserved.
+            &copy; {new Date().getFullYear()} CricSync. All Rights Reserved.
           </p>
         </div>
         <div className="mt-4">

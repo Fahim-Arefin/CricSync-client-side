@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { TbLayoutGridAdd } from "react-icons/tb";
+
 import { createMatch, fetchAllTeam } from "../store";
 import Button from "./Button";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import SpinnerWithBlur from "./SpinnerWithBlur";
+import { Helmet } from "react-helmet-async";
 
 const CreateMatchForm = () => {
   const { user, successToast, errorToast } = useAuth();
@@ -24,11 +28,12 @@ const CreateMatchForm = () => {
     dispatch(fetchAllTeam());
   }, [dispatch]);
 
-  const { teams, matches, error } = useSelector((state) => {
+  const { teams, matches, error, isLoading } = useSelector((state) => {
     return {
       teams: state.teams.data,
       matches: state.matches.data,
       error: state.matches.error,
+      isLoading: state.matches.isLoading,
     };
   });
 
@@ -47,7 +52,21 @@ const CreateMatchForm = () => {
     e.preventDefault();
     // Handle form submission, e.g., send data to the server
     console.log("Form data submitted:", formData);
-    dispatch(createMatch(formData))
+
+    const t1 = teams.find((team) => team._id === formData.team1);
+    const t2 = teams.find((team) => team._id === formData.team2);
+
+    const data = {
+      author: formData.author,
+      team1: t1,
+      team2: t2,
+      overs: formData.overs,
+      stadium: formData.stadium,
+      start: formData.start,
+    };
+
+    console.log(data);
+    dispatch(createMatch(data))
       .unwrap()
       .then(() => {
         successToast("Match Created Successfull!", 2000);
@@ -62,6 +81,10 @@ const CreateMatchForm = () => {
 
   return (
     <div className="container mx-auto mt-8">
+      {isLoading && <SpinnerWithBlur />}
+      <Helmet>
+        <title>CricSync | Create Match</title>
+      </Helmet>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto p-8 rounded ">
         <h2 className="text-4xl font-bold text-[#f87060] mb-12">
           Create Match
@@ -175,7 +198,8 @@ const CreateMatchForm = () => {
             primary
             className="px-4 py-2 rounded-md flex space-x-2 items-center font-bold"
           >
-            Create Match
+            <TbLayoutGridAdd />
+            <span>{isLoading ? "Creating..." : "Create Match"}</span>
           </Button>
         </div>
         <ToastContainer

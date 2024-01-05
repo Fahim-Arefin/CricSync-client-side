@@ -13,9 +13,13 @@ import TeamForm from "./components/TeamForm";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import CreateMatchForm from "./components/CreateMatchFrom";
+import MatchDetails from "./pages/MatchDetails";
+import PrivateRoutes from "./components/PrivateRoutes";
+import PageNotFound from "./components/PageNotFound";
 
 const router = createBrowserRouter([
   {
+    errorElement: <PageNotFound />,
     element: <AppLayout />,
     children: [
       {
@@ -32,15 +36,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/match/new",
-        element: <CreateMatchForm />,
+        element: (
+          <PrivateRoutes>
+            <CreateMatchForm />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/match/details/:id",
+        element: (
+          <PrivateRoutes>
+            <MatchDetails />
+          </PrivateRoutes>
+        ),
       },
     ],
   },
   {
+    errorElement: <PageNotFound />,
     path: "/registration",
     element: <Registration />,
   },
   {
+    errorElement: <PageNotFound />,
     path: "/login",
     element: <Login />,
   },

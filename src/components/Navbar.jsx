@@ -53,13 +53,8 @@ function Navbar({ className }) {
             </li>
 
             <li>
-              <NavLink to="/properties">All Properties</NavLink>
+              <NavLink to="/match/new">Create Match</NavLink>
             </li>
-            {user && (
-              <li>
-                <NavLink to="/dashboard">Dashboard</NavLink>
-              </li>
-            )}
           </ul>
         </div>
         <div className="text-xl tracking-widest font-bold flex items-center space-x-4 px-6 py-4 rounded-lg">
@@ -83,21 +78,11 @@ function Navbar({ className }) {
           <li>
             <NavLink
               className="cursor-pointer font-semibold hover:border-b-2 hover:border-b-[#f87060] transition-all duration-150 px-4 py-1 rounded-sm "
-              to="/properties"
+              to="/match/new"
             >
-              All properties
+              Create Match
             </NavLink>
           </li>
-          {user && (
-            <li>
-              <NavLink
-                className="cursor-pointer font-semibold hover:border-b-2 hover:border-b-[#f87060] transition-all duration-150 px-4 py-1 rounded-sm "
-                to="/dashboard"
-              >
-                Dashboard
-              </NavLink>
-            </li>
-          )}
         </ul>
       </div>
       <div className="navbar-end">

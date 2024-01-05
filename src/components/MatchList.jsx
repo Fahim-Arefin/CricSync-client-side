@@ -1,20 +1,17 @@
-// MatchList.js
-
 import Button from "./Button";
 import { TbListDetails } from "react-icons/tb";
 
 const MatchList = ({ matches }) => {
   return (
     <div className="container mx-auto mt-8">
-      <h2 className="text-4xl font-bold text-[#f87060] mb-8">
-        Upcoming Matches
-      </h2>
+      <h2 className="text-2xl font-bold mb-8">Upcoming Matches</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        {matches.length === 0 && <span>please create match</span>}
         {matches.map((match) => (
           <div
             key={match._id}
-            className="bg-white px-12 py-8 rounded-lg shadow-md transition-transform transform hover:scale-105 duration-150"
+            className="bg-white px-2 md:px-12 py-4 md:py-8 rounded-lg shadow-md transition-transform transform hover:scale-105 duration-150"
           >
             <div className="flex items-center justify-between mb-2">
               <div className="">
@@ -36,29 +33,30 @@ const MatchList = ({ matches }) => {
             </div>
             <div className="flex justify-between items-center mb-1">
               <div>
-                <p className="text-blue-500 font-semibold text-xl">
+                <p className="text-blue-500 font-semibold text-sm md:text-xl">
                   {match.team1.name}
                 </p>
-                <p className="text-gray-700 text-center">
-                  {match.team1Score
-                    ? `${match.team1Score.runs}/${match.team1Score.wickets}`
-                    : "0/0"}
-                </p>
+                {/* <p className="text-gray-700 text-center">
+                  {match.team1.totalScore}
+                  <span>/</span>
+                  {match.team1.totalWicket}
+                </p> */}
               </div>
-              <p className="text-gray-800 text-xl">vs</p>
+              <p className="text-gray-800 text-sm md:text-xl">vs</p>
               <div>
-                <p className="text-red-500 font-semibold text-xl">
+                <p className="text-red-500 font-semibold text-sm md:text-xl">
                   {match.team2.name}
                 </p>
-                <p className="text-gray-700 text-center">
-                  {match.team2Score
-                    ? `${match.team2Score.runs}/${match.team2Score.wickets}`
-                    : "0/0"}
-                </p>
+                {/* <p className="text-gray-700 text-center">
+                  {match.team2.totalScore}
+                  <span>/</span>
+                  {match.team2.totalWicket}
+                </p> */}
               </div>
             </div>
             <div className="justify-between items-center">
               <Button
+                to={`/match/details/${match._id}`}
                 primary
                 className="mt-4 flex space-x-2 justify-center items-center px-3 py-1 rounded-md w-full"
               >

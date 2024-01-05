@@ -59,17 +59,3 @@ To explore the TrendyTexture website, visit: [Live Website](https://cricket-dash
 
    - [x] **End a Match:**
      - Mark a match as completed by choosing the "End Match" option in the match details section. This action finalizes the match results.
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js and npm installed.
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/cricket-score-management.git
-   ```
